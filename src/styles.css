@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-
 @custom-variant dark (&:is(.dark *));
 
 /*
@@ -12,10 +11,6 @@
  *
  * The :root and .dark blocks define the actual color values using oklch.
  * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
  */
 
 @theme inline {
@@ -163,3 +158,54 @@
   color: #18181b;
 }
 
+/* Configuração de Impressão de Alta Definição (PDF/A4) */
+@media print {
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  /* Oculta o painel de controles e o cabeçalho do app */
+  header,
+  main > div > div:first-child,
+  button {
+    display: none !important;
+  }
+
+  /* Reseta escalas e ajusta a folha A4 no centro da impressão */
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+    min-height: auto !important;
+    background: white !important;
+  }
+
+  main > div {
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+
+  main > div > div:last-child {
+    position: static !important;
+    overflow: visible !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  main > div > div:last-child > div {
+    transform: none !important;
+    scale: 1 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+}

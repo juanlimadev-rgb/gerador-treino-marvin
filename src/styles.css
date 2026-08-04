@@ -148,10 +148,47 @@
   color: #18181b;
 }
 
-/* Regra simples para garantir que fundos e imagens apareçam na impressão */
+/* Remove sombra/degradê do rodapé e unifica a folha em branco puro */
 @media print {
   * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* Elimina pseudos que geram degradê/sombra na parte inferior */
+  *:before, *:after {
+    box-shadow: none !important;
+    background-image: none !important;
+  }
+
+  /* Fundo da tela de impressão em branco puro */
+  html, body, main {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+  }
+
+  /* A folha A4 não deve ter limite de altura fixo nem sombras na impressão */
+  .sheet-a4, [class*="sheet-a4"] {
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+  }
+
+  /* Mantém as tabelas sem quebrar ao meio */
+  table, tr, .bg-neutral-900, [class*="bg-neutral"], [class*="bg-zinc"] {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 10mm;
   }
 }

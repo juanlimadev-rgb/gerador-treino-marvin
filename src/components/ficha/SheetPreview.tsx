@@ -27,7 +27,7 @@ export function SheetPreview({ info, blocks, logoUrl }: Props) {
   return (
     <div
       id="ficha-a4"
-      className="sheet-a4 flex flex-col px-[54px] py-[48px]"
+      className="sheet-a4 printable-sheet flex flex-col px-[54px] py-[48px]"
       style={{ fontFamily: '"DM Sans", sans-serif' }}
     >
       <header className="flex items-start justify-between gap-6">

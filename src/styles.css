@@ -148,7 +148,7 @@
   color: #18181b;
 }
 
-/* Remove sombra/degradê do rodapé e unifica a folha em branco puro */
+/* Ajuste definitivo para PDF no celular e no computador */
 @media print {
   * {
     -webkit-print-color-adjust: exact !important;
@@ -157,31 +157,35 @@
     text-shadow: none !important;
   }
 
-  /* Elimina pseudos que geram degradê/sombra na parte inferior */
   *:before, *:after {
     box-shadow: none !important;
     background-image: none !important;
   }
 
-  /* Fundo da tela de impressão em branco puro */
   html, body, main {
     background: #ffffff !important;
     background-color: #ffffff !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
-  /* A folha A4 não deve ter limite de altura fixo nem sombras na impressão */
+  /* Força a folha a manter a proporção exata de A4 mesmo em telas pequenas de celular */
   .sheet-a4, [class*="sheet-a4"] {
-    width: 100% !important;
+    width: 794px !important;
+    min-width: 794px !important;
+    max-width: 794px !important;
     height: auto !important;
     min-height: auto !important;
     box-shadow: none !important;
     border: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
+    margin: 0 auto !important;
+    padding: 20px !important;
     background: #ffffff !important;
+    transform: scale(1) !important; /* Força tirar qualquer encolhimento de tela */
   }
 
-  /* Mantém as tabelas sem quebrar ao meio */
+  /* Mantém as tabelas sem quebrar no meio */
   table, tr, .bg-neutral-900, [class*="bg-neutral"], [class*="bg-zinc"] {
     page-break-inside: avoid !important;
     break-inside: avoid !important;
@@ -189,6 +193,6 @@
 
   @page {
     size: A4 portrait;
-    margin: 10mm;
+    margin: 0;
   }
 }

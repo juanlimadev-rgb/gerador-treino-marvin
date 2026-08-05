@@ -148,71 +148,33 @@
   color: #18181b;
 }
 
-/* Regra de Impressão Definitiva (Mobile iOS/Chrome e PC) */
+/* Configuração de Impressão Limpa e Estável */
 @media print {
-  /* 1. Limpa o fundo da página geral */
-  html, body {
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  body {
     background: #ffffff !important;
-    background-color: #ffffff !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    height: auto !important;
-  }
-
-  /* 2. Oculta os painéis da interface do site (formulário lateral e botões) */
-  header,
-  nav,
-  aside,
-  button,
-  .no-print,
-  main > div > div:first-child {
-    display: none !important;
-  }
-
-  /* 3. Reseta containers pais da ficha para não limarem a página */
-  main, main > div, main > div > div {
-    display: block !important;
-    position: static !important;
-    background: transparent !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    width: 100% !important;
-    height: auto !important;
-    min-height: 0 !important;
-    box-shadow: none !important;
-  }
-
-  /* 4. Força a ficha A4 (printable-sheet) a ocupar a folha inteira sem ficar minúscula */
-  .printable-sheet, #ficha-a4 {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    min-height: auto !important;
-    height: auto !important;
-    margin: 0 !important;
-    padding: 30px !important;
-    box-shadow: none !important;
-    border: none !important;
-    background: #ffffff !important;
-    transform: none !important;
-  }
-
-  /* 5. Preserva as cores do cabeçalho escuro da tabela e da linha roxa */
-  * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
 
-  /* 6. Evita que um bloco de treino seja fatiado ao meio na quebra de página */
+  /* Garante que a folha ocupe o papel A4 sem sombras nem fundos escuros */
+  .sheet-a4 {
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 40px !important;
+    background: #ffffff !important;
+  }
+
+  /* Impede fatiamento de treinos no meio da folha */
   article, table, tr {
     page-break-inside: avoid !important;
     break-inside: avoid !important;
-  }
-
-  @page {
-    size: A4 portrait;
-    margin: 0;
   }
 }

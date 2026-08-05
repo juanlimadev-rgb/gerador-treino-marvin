@@ -148,51 +148,53 @@
   color: #18181b;
 }
 
-/* Ajuste definitivo para PDF no celular e no computador */
+/* Ajuste de impressão universal (Desktop e Mobile) */
 @media print {
-  * {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-    box-shadow: none !important;
-    text-shadow: none !important;
-  }
-
-  *:before, *:after {
-    box-shadow: none !important;
-    background-image: none !important;
-  }
-
-  html, body, main {
+  /* Oculta tudo na tela de impressão */
+  body {
     background: #ffffff !important;
-    background-color: #ffffff !important;
-    width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
   }
 
-  /* Força a folha a manter a proporção exata de A4 mesmo em telas pequenas de celular */
-  .sheet-a4, [class*="sheet-a4"] {
-    width: 794px !important;
-    min-width: 794px !important;
-    max-width: 794px !important;
-    height: auto !important;
-    min-height: auto !important;
-    box-shadow: none !important;
-    border: none !important;
-    margin: 0 auto !important;
-    padding: 20px !important;
-    background: #ffffff !important;
-    transform: scale(1) !important; /* Força tirar qualquer encolhimento de tela */
+  body * {
+    visibility: hidden !important;
   }
 
-  /* Mantém as tabelas sem quebrar no meio */
-  table, tr, .bg-neutral-900, [class*="bg-neutral"], [class*="bg-zinc"] {
+  /* Exibe exclusivamente a folha A4 */
+  .sheet-a4,
+  .sheet-a4 * {
+    visibility: visible !important;
+  }
+
+  /* Força a folha A4 a ficar no topo absoluto sem margens de tela */
+  .sheet-a4 {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: #ffffff !important;
+    transform: none !important;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Evita quebras de tabela e treinos no meio da página */
+  table, tr, .bg-neutral-900, [class*="bg-neutral"] {
     page-break-inside: avoid !important;
     break-inside: avoid !important;
   }
 
   @page {
     size: A4 portrait;
-    margin: 0;
+    margin: 10mm;
   }
 }
